@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  gestao-estoque:
+    image: gestao-estoque
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: gestao-estoque
+    restart: unless-stopped
+    ports:
+      - 9090:80
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - infra-postgres
+      - gestao-estoque
+networks:
+  infra-postgres:
+    external: true
+  gestao-estoque:
+    name: gestao-estoque-network
