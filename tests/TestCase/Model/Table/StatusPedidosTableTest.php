@@ -9,6 +9,7 @@ use Cake\TestSuite\TestCase;
 
 /**
  * App\Model\Table\StatusPedidosTable Test Case
+ * @group unitario
  */
 class StatusPedidosTableTest extends TestCase
 {

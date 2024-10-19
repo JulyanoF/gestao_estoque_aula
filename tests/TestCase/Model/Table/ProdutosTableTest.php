@@ -11,6 +11,7 @@ use Faker\Generator;
 
 /**
  * App\Model\Table\ProdutosTable Test Case
+ * @group unitario
  */
 class ProdutosTableTest extends TestCase
 {
