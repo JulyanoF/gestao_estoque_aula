@@ -2,7 +2,8 @@
 
 use Cake\Cache\Engine\FileEngine;
 use Cake\Database\Connection;
-use Cake\Database\Driver\Potgres;
+use Cake\Database\Driver\Postgres;
+use Cake\Database\Driver\Sqlite;
 use Cake\Log\Engine\FileLog;
 use Cake\Mailer\Transport\MailTransport;
 
@@ -16,7 +17,7 @@ return [
      * Development Mode:
      * true: Errors and warnings shown.
      */
-    'debug' => filter_var(env('DEBUG', false), FILTER_VALIDATE_BOOLEAN),
+    'debug'          => filter_var(env('DEBUG', false), FILTER_VALIDATE_BOOLEAN),
 
     /*
      * Configure basic information about the application.
@@ -46,24 +47,24 @@ return [
      *   `plugins`, `templates`, `locales` subkeys, which allow the definition of
      *   paths for plugins, view templates and locale files respectively.
      */
-    'App' => [
-        'namespace' => 'App',
-        'encoding' => env('APP_ENCODING', 'UTF-8'),
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'pt_BR'),
+    'App'            => [
+        'namespace'       => 'App',
+        'encoding'        => env('APP_ENCODING', 'UTF-8'),
+        'defaultLocale'   => env('APP_DEFAULT_LOCALE', 'pt_BR'),
         'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'America/Sao_Paulo'),
-        'base' => false,
-        'dir' => 'src',
-        'webroot' => 'webroot',
-        'wwwRoot' => WWW_ROOT,
+        'base'            => false,
+        'dir'             => 'src',
+        'webroot'         => 'webroot',
+        'wwwRoot'         => WWW_ROOT,
         //'baseUrl' => env('SCRIPT_NAME'),
-        'fullBaseUrl' => false,
-        'imageBaseUrl' => 'img/',
-        'cssBaseUrl' => 'css/',
-        'jsBaseUrl' => 'js/',
-        'paths' => [
-            'plugins' => [ROOT . DS . 'plugins' . DS],
+        'fullBaseUrl'     => false,
+        'imageBaseUrl'    => 'img/',
+        'cssBaseUrl'      => 'css/',
+        'jsBaseUrl'       => 'js/',
+        'paths'           => [
+            'plugins'   => [ROOT . DS . 'plugins' . DS],
             'templates' => [ROOT . DS . 'templates' . DS],
-            'locales' => [RESOURCES . 'locales' . DS],
+            'locales'   => [RESOURCES . 'locales' . DS],
         ],
     ],
 
@@ -74,7 +75,7 @@ return [
      *   The salt value is also used as the encryption key.
      *   You should treat it as extremely sensitive data.
      */
-    'Security' => [
+    'Security'       => [
         'salt' => env('SECURITY_SALT'),
     ],
 
@@ -86,7 +87,7 @@ return [
      * Set to true to apply timestamps when debug is true. Set to 'force' to always
      * enable timestamping regardless of debug value.
      */
-    'Asset' => [
+    'Asset'          => [
         //'timestamp' => true,
         // 'cacheTime' => '+1 year'
     ],
@@ -94,11 +95,11 @@ return [
     /*
      * Configure the cache adapters.
      */
-    'Cache' => [
-        'default' => [
+    'Cache'          => [
+        'default'      => [
             'className' => FileEngine::class,
-            'path' => CACHE,
-            'url' => env('CACHE_DEFAULT_URL', null),
+            'path'      => CACHE,
+            'url'       => env('CACHE_DEFAULT_URL', null),
         ],
 
         /*
@@ -107,13 +108,13 @@ return [
          * Duration will be set to '+2 minutes' in bootstrap.php when debug = true
          * If you set 'className' => 'Null' core cache will be disabled.
          */
-        '_cake_core_' => [
+        '_cake_core_'  => [
             'className' => FileEngine::class,
-            'prefix' => 'myapp_cake_core_',
-            'path' => CACHE . 'persistent' . DS,
+            'prefix'    => 'myapp_cake_core_',
+            'path'      => CACHE . 'persistent' . DS,
             'serialize' => true,
-            'duration' => '+1 years',
-            'url' => env('CACHE_CAKECORE_URL', null),
+            'duration'  => '+1 years',
+            'url'       => env('CACHE_CAKECORE_URL', null),
         ],
 
         /*
@@ -124,11 +125,11 @@ return [
          */
         '_cake_model_' => [
             'className' => FileEngine::class,
-            'prefix' => 'myapp_cake_model_',
-            'path' => CACHE . 'models' . DS,
+            'prefix'    => 'myapp_cake_model_',
+            'path'      => CACHE . 'models' . DS,
             'serialize' => true,
-            'duration' => '+1 years',
-            'url' => env('CACHE_CAKEMODEL_URL', null),
+            'duration'  => '+1 years',
+            'url'       => env('CACHE_CAKEMODEL_URL', null),
         ],
     ],
 
@@ -169,12 +170,12 @@ return [
      *   should be ignored in. Use this to ignore deprecations for plugins or parts of
      *   your application that still emit deprecations.
      */
-    'Error' => [
-        'errorLevel' => E_ALL,
-        'skipLog' => [],
-        'log' => true,
-        'trace' => true,
-        'ignoredDeprecationPaths' => [],
+    'Error'          => [
+        'errorLevel'              => E_ALL,
+        'skipLog'                 => [],
+        'log'                     => true,
+        'trace'                   => true,
+        'ignoredDeprecationPaths' => ['vendor/cakephp/cakephp/src/I18n/I18n.php'],
     ],
 
     /*
@@ -189,7 +190,7 @@ return [
      * - `outputMask` A mapping of `key` to `replacement` values that
      *   `Debugger` should replace in dumped data and logs generated by `Debugger`.
      */
-    'Debugger' => [
+    'Debugger'       => [
         'editor' => 'phpstorm',
     ],
 
@@ -219,17 +220,17 @@ return [
              * The keys host, port, timeout, username, password, client and tls
              * are used in SMTP transports
              */
-            'host' => 'localhost',
-            'port' => 25,
-            'timeout' => 30,
+            'host'      => 'localhost',
+            'port'      => 25,
+            'timeout'   => 30,
             /*
              * It is recommended to set these options through your environment or app_local.php
              */
             //'username' => null,
             //'password' => null,
-            'client' => null,
-            'tls' => false,
-            'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+            'client'    => null,
+            'tls'       => false,
+            'url'       => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
     ],
 
@@ -242,10 +243,10 @@ return [
      * easier. Each profile accepts a number of keys. See `Cake\Mailer\Email`
      * for more information.
      */
-    'Email' => [
+    'Email'          => [
         'default' => [
             'transport' => 'default',
-            'from' => 'you@localhost',
+            'from'      => 'you@localhost',
             /*
              * Will by default be set to config value of App.encoding, if that exists otherwise to UTF-8.
              */
@@ -267,7 +268,7 @@ return [
      *   E.g set it to 'utf8mb4' in MariaDB and MySQL and 'utf8' for any
      *   other RDBMS.
      */
-    'Datasources' => [
+    'Datasources'    => [
         /*
          * These configurations should contain permanent settings used
          * by all environments.
@@ -279,64 +280,62 @@ return [
          * in app_local.php depending on the applications needs.
          */
         'default' => [
-            'className' => Connection::class,
-            'driver' => Postgres::class,
-            'host' => env('PG_HOST'),
-            'username' => env('PG_USER'),
-            'password' => env('PG_PASSWORD'),
-            'port' => env('PG_PORT'),
-            'database' => env('DATABASE'),
-            'persistent' => false,
-            'flags' => [],
-            'cacheMetadata' => true,
-            'log' => false,
+            'className'        => Connection::class,
+            'driver'           => Postgres::class,
+            'host'             => env('PG_HOST'),
+            'username'         => env('PG_USER'),
+            'password'         => env('PG_PASSWORD'),
+            'port'             => env('PG_PORT'),
+            'database'         => env('DATABASE'),
+            'persistent'       => false,
+            'flags'            => [],
+            'cacheMetadata'    => true,
+            'log'              => false,
             'quoteIdentifiers' => false,
         ],
 
         /*
          * The test connection is used during the test suite.
          */
-        // 'test' => [
-        //     'className' => Connection::class,
-        //     'driver' => Mysql::class,
-        //     'persistent' => false,
-        //     'timezone' => 'UTC',
-        //     //'encoding' => 'utf8mb4',
-        //     'flags' => [],
-        //     'cacheMetadata' => true,
-        //     'quoteIdentifiers' => false,
-        //     'log' => false,
-        //     //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
-        // ],
+        'test'    => [
+            'className'        => Connection::class,
+            'driver'           => Sqlite::class,
+            'database'         => 'tests.sqlite',
+            'persistent'       => false,
+            'flags'            => [],
+            'cacheMetadata'    => true,
+            'quoteIdentifiers' => false,
+            'log'              => false,
+        ],
     ],
 
     /*
      * Configures logging options
      */
-    'Log' => [
-        'debug' => [
+    'Log'            => [
+        'debug'   => [
             'className' => FileLog::class,
-            'path' => LOGS,
-            'file' => 'debug',
-            'url' => env('LOG_DEBUG_URL', null),
-            'scopes' => null,
-            'levels' => ['notice', 'info', 'debug'],
+            'path'      => LOGS,
+            'file'      => 'debug',
+            'url'       => env('LOG_DEBUG_URL', null),
+            'scopes'    => null,
+            'levels'    => ['notice', 'info', 'debug'],
         ],
-        'error' => [
+        'error'   => [
             'className' => FileLog::class,
-            'path' => LOGS,
-            'file' => 'error',
-            'url' => env('LOG_ERROR_URL', null),
-            'scopes' => null,
-            'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
+            'path'      => LOGS,
+            'file'      => 'error',
+            'url'       => env('LOG_ERROR_URL', null),
+            'scopes'    => null,
+            'levels'    => ['warning', 'error', 'critical', 'alert', 'emergency'],
         ],
         // To enable this dedicated query log, you need set your datasource's log flag to true
         'queries' => [
             'className' => FileLog::class,
-            'path' => LOGS,
-            'file' => 'queries',
-            'url' => env('LOG_QUERIES_URL', null),
-            'scopes' => ['cake.database.queries'],
+            'path'      => LOGS,
+            'file'      => 'queries',
+            'url'       => env('LOG_QUERIES_URL', null),
+            'scopes'    => ['cake.database.queries'],
         ],
     ],
 
@@ -379,7 +378,7 @@ return [
      *
      * To use database sessions, load the SQL file located at config/schema/sessions.sql
      */
-    'Session' => [
+    'Session'        => [
         'defaults' => 'php',
     ],
 ];

@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y \
     cron \
     procps \
     libjpeg-dev \
-    libfreetype6-dev
+    libfreetype6-dev \
+    sqlite3
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 

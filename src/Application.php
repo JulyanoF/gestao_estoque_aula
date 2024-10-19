@@ -50,7 +50,8 @@ class Application extends BaseApplication
 
         if (PHP_SAPI === 'cli') {
             $this->bootstrapCli();
-        } else {
+        }
+        else {
             FactoryLocator::add(
                 'Table',
                 (new TableLocator())->allowFallbackClass(false)
@@ -63,6 +64,7 @@ class Application extends BaseApplication
          */
         if (Configure::read('debug')) {
             $this->addPlugin('DebugKit');
+            $this->addPlugin('CakephpFixtureFactories');
         }
 
         // Load more plugins here
