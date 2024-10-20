@@ -6,8 +6,6 @@ namespace App\Test\TestCase\Model\Table;
 use App\Model\Table\ProdutosTable;
 use App\Test\Factory\ProdutoFactory;
 use Cake\TestSuite\TestCase;
-use Faker\Factory;
-use Faker\Generator;
 
 /**
  * App\Model\Table\ProdutosTable Test Case
@@ -64,15 +62,17 @@ class ProdutosTableTest extends TestCase
     public function testValidationDefault(): void
     {
         $produto = ProdutoFactory::make(1)->getEntity();
-        // $produto = $this->Produtos->newEntity([
-        //     'nome'      => 'Banana da Silva',
-        //     'descricao' => 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-        //     'preco'     => 15.50,
-        //     'estoque'   => 20,
-        //     'excluido'  => false
-        // ]);
-        // debug($produto);
-        // die;
         $this->assertFalse($produto->hasErrors());
+    }
+
+    public function testValidationPreco(): void
+    {
+        $produto               = ProdutoFactory::make(1)->getEntity();
+        $produto_data          = $produto->toArray();
+        $produto_data['preco'] = 'abc';
+        $produto_new           = $this->Produtos->newEntity($produto_data);
+        $campos_invalidos      = $produto_new->getInvalid();
+        $this->assertTrue($produto_new->hasErrors());
+        $this->assertArrayHasKey('preco', $campos_invalidos);
     }
 }
