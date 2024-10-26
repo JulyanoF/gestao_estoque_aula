@@ -36,6 +36,11 @@ RUN docker-php-ext-install \
     xml \
     sockets
 
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
+
+COPY php/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
+
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
