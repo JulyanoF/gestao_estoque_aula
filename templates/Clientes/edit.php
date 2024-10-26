@@ -22,10 +22,10 @@
             <fieldset>
                 <legend><?= __('Edit Cliente') ?></legend>
                 <?php
-                    echo $this->Form->control('nome');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('telefone');
-                    echo $this->Form->control('excluido');
+                echo $this->Form->control('nome');
+                echo $this->Form->control('email');
+                echo $this->Form->control('telefone');
+                echo $this->Form->control('excluido');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
