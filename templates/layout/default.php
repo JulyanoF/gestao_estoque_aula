@@ -19,6 +19,8 @@
     <?= $this->Html->css('/tema/plugins/icheck-bootstrap/icheck-bootstrap.min.css') ?>
     <!-- JQVMap -->
     <?= $this->Html->css('/tema/plugins/jqvmap/jqvmap.min.css') ?>
+    <!-- Toastr -->
+    <?= $this->Html->css('/tema/plugins/toastr/toastr.min.css') ?>
     <!-- Theme style -->
     <?= $this->Html->css('/tema/css/adminlte.min.css') ?>
     <!-- overlayScrollbars -->
@@ -27,10 +29,12 @@
     <?= $this->Html->css('/tema/plugins/daterangepicker/daterangepicker.css') ?>
     <!-- summernote -->
     <?= $this->Html->css('/tema/plugins/summernote/summernote-bs4.min.css') ?>
+    <!-- jQuery -->
+    <?= $this->Html->script('/tema/plugins/jquery/jquery.min.js') ?>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <?= $this->Flash->render() ?>
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -905,8 +909,6 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <?= $this->Html->script('/tema/plugins/jquery/jquery.min.js') ?>
     <!-- jQuery UI 1.11.4 -->
     <?= $this->Html->script('/tema/plugins/jquery-ui/jquery-ui.min.js') ?>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -933,12 +935,13 @@
     <?= $this->Html->script('/tema/plugins/jquery/jquery.min.js') ?>
     <!-- overlayScrollbars -->
     <?= $this->Html->script('/tema/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>
+    <!-- Toastr -->
+    <?= $this->Html->script('/tema/plugins/toastr/toastr.min.js') ?>
     <!-- AdminLTE App -->
     <?= $this->Html->script('/tema/js/adminlte.js') ?>
     <!-- AdminLTE for demo purposes -->
     <?= $this->Html->script('/tema/js/demo.js') ?>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <?= $this->Html->script('/tema/js/pages/dashboard.js') ?>
+    <?= $this->Flash->render() ?>
 </body>
 
 </html>
