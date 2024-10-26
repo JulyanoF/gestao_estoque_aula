@@ -31,9 +31,15 @@
                                 <td><?= h($cliente->created) ?></td>
                                 <td><?= h($cliente->modified) ?></td>
                                 <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['action' => 'view', $cliente->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $cliente->id]) ?>
-                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $cliente->id], ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->id)]) ?>
+                                    <a type="button"
+                                        href="<?= $this->Url->build(['controller' => 'Clientes', 'action' => 'view', $cliente->id]) ?>"
+                                        class="btn btn-default btn-sm"><i class="fa fa-solid fa-eye"></i></a>
+                                    <a type="button"
+                                        href="<?= $this->Url->build(['controller' => 'Clientes', 'action' => 'edit', $cliente->id]) ?>"
+                                        class="btn btn-primary btn-sm"><i class="fa fa-solid fa-edit"></i></a>
+                                    <a type="button"
+                                        href="<?= $this->Url->build(['controller' => 'Clientes', 'action' => 'delete', $cliente->id]) ?>"
+                                        class="btn btn-danger btn-sm"><i class="fa fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
